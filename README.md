@@ -118,3 +118,8 @@ Utilisez Postman pour tester l'endpoint POST /api/v1/blagues avec un corps JSON 
   "question": "Pourquoi l'épouvantail est-il devenu conférencier motivateur ?",
   "reponse": "Parce qu'il était exceptionnel dans son champ !"
 }
+
+
+Romain Monier – Juillet 2025  
+Formation Concepteur Développeur d’Applications  
+Simplon.co Lille
