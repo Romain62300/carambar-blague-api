@@ -1,0 +1,27 @@
+{
+  "name": "carambar-blague-api",
+  "version": "1.0.0",
+  "description": "API pour l'application de blagues Carambar & Co",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "API",
+    "Express",
+    "Sequelize",
+    "Carambar",
+    "Blagues"
+  ],
+  "author": "Romain Monier",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "sequelize": "^6.32.1",
+    "sqlite3": "^5.1.6",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
+  }
+}
