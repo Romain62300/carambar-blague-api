@@ -11,9 +11,9 @@ const options = {
     },
     servers: [
       {
-        url: //'http://localhost:3000/api/v1',//https://
-        carambar-blague-api.onrender.com,
+        url: 'https://carambar-blague-api.onrender.com/api/v1',
         description: 'Serveur Render',
+
       },
     ],
   },
