@@ -1,21 +1,16 @@
-const Blague = require('./models/Blague'); // ✅ PAS de { Joke }
-const sequelize = require('./config/database'); // ✅ attention au nom du fichier
+const Blague = require('./models/Blague');
+const sequelize = require('./config/database');
+const blagues = require('./data/blagues'); // Import des 10 blagues depuis le bon fichier
 
 const seed = async () => {
   try {
-    await sequelize.sync();
+    await sequelize.sync({ force: true }); // supprime et recrée la table proprement
 
-    const jokes = [
-      { question: "Pourquoi les canards ont-ils autant de plumes ?", reponse: "Pour couvrir leur derrière." },
-      { question: "Quel est le comble pour un électricien ?", reponse: "De ne pas être au courant." },
-      { question: "Pourquoi les plongeurs plongent-ils toujours en arrière et jamais en avant ?", reponse: "Parce que sinon ils tombent dans le bateau." },
-    ];
-
-    await Blague.bulkCreate(jokes);
-    console.log('Blagues ajoutées avec succès !');
+    await Blague.bulkCreate(blagues);
+    console.log('🎉 Blagues ajoutées avec succès !');
     process.exit();
   } catch (err) {
-    console.error('Erreur de seed :', err);
+    console.error('❌ Erreur lors du seed :', err);
     process.exit(1);
   }
 };
