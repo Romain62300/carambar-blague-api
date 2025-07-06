@@ -13,15 +13,21 @@ const options = {
       {
         url: 'https://carambar-blague-api.onrender.com/api/v1',
         description: 'Serveur Render',
-
       },
     ],
   },
-  apis: ['./routes/api/v1/*.js'], // Chemin vers les fichiers annotés
+  apis: ['./routes/api/v1/*.js'], // adapte si ton dossier change
 };
 
 const specs = swaggerJsdoc(options);
 
+// ✅ On exporte la fonction correctement
 module.exports = (app) => {
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
+  // ✅ Export Swagger au format JSON
+  app.get('/swagger.json', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(specs);
+  });
 };

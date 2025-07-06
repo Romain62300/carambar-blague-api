@@ -115,5 +115,23 @@ router.post('/', BlagueController.creerBlague);
  */
 router.get('/', BlagueController.obtenirToutesBlagues);
 
+/**
+ * @swagger
+ * /blagues/{id}:
+ *   delete:
+ *     summary: Supprime une blague par ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Blague supprimée avec succès
+ *       404:
+ *         description: Blague non trouvée
+ */
+router.delete('/:id', BlagueController.supprimerBlague);
 
 module.exports = router;

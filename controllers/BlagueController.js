@@ -48,6 +48,21 @@ class BlagueController {
       res.status(500).json({ erreur: 'Échec de la récupération d\'une blague aléatoire' });
     }
   }
+
+  static async supprimerBlague(req, res) {
+    try {
+      const id = req.params.id;
+      const resultat = await Blague.destroy({ where: { id } });
+
+      if (resultat === 0) {
+        return res.status(404).json({ erreur: 'Blague non trouvée' });
+      }
+
+      res.status(204).send(); // succès, pas de contenu à renvoyer
+    } catch (erreur) {
+      res.status(500).json({ erreur: 'Échec de la suppression de la blague' });
+    }
+  }
 }
 
 module.exports = BlagueController;

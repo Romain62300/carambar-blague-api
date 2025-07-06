@@ -9,26 +9,30 @@ const configurerSwagger = require('./swagger/swagger');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+}));
 
-app.use(cors());
+
 app.use(express.json());
 
 // Routes API
 app.use('/api/v1/blagues', blagueRoutes);
 
-// Documentation Swagger
+// Swagger
 configurerSwagger(app);
 
-// Démarrage du serveur + synchronisation
+// Démarrage du serveur
 (async () => {
   try {
     await sequelize.sync();
     console.log('✅ Base de données synchronisée');
-
-    app.listen(PORT, () =>
-      console.log(`🚀 Serveur lancé sur http://localhost:${PORT}\n📘 Swagger: http://localhost:${PORT}/api-docs`)
-    );
-  } catch (erreur) {
-    console.error('❌ Échec du démarrage du serveur :', erreur);
+    app.listen(PORT, () => {
+      console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
+      console.log(`📘 Swagger disponible sur http://localhost:${PORT}/api-docs`);
+    });
+  } catch (err) {
+    console.error('❌ Échec du démarrage du serveur :', err);
   }
 })();
