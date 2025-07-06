@@ -2,13 +2,19 @@ const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
 const sequelize = new Sequelize(
-  process.env.DB_NAME,         // nom de la BDD
-  process.env.DB_USER,         // utilisateur
-  process.env.DB_PASS,         // mot de passe
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASS,
   {
-    host: process.env.DB_HOST, // hôte
-    port: process.env.DB_PORT, // port
-    dialect: 'postgres',       // !!! ÉCRIS ICI EN DUR !!!
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    },
     logging: false
   }
 );
