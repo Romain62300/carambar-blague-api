@@ -1,6 +1,7 @@
-# API Carambar & Co – Projet de sélection CDA Simplon
+# 📦 API Carambar & Co – Projet de sélection CDA Simplon
 
-Cette API permet de gérer un ensemble de blagues (ajout, consultation, suppression). Elle alimente une application React.
+Cette API REST permet de gérer une collection de blagues pour l’entreprise Carambar & Co.  
+Elle fournit des fonctionnalités CRUD (Create, Read, Delete) consommées par un frontend React.
 
 ---
 
@@ -8,37 +9,91 @@ Cette API permet de gérer un ensemble de blagues (ajout, consultation, suppress
 
 ```bash
 npm install
-npm start
+node server.js
 ```
 
-Le serveur démarre sur `http://localhost:5000`
+Le serveur démarre par défaut sur :  
+👉 `http://localhost:5000`
 
 ---
 
 ## 🔌 Endpoints disponibles
 
-- `GET /api/v1/blagues` → Toutes les blagues  
-- `GET /api/v1/blagues/:id` → Une blague par ID  
-- `GET /api/v1/blagues/random` → Une blague aléatoire  
-- `POST /api/v1/blagues` → Ajouter une blague  
-- `DELETE /api/v1/blagues/:id` → Supprimer une blague
+| Méthode | Endpoint                    | Description                |
+|---------|-----------------------------|----------------------------|
+| GET     | `/api/v1/blagues`           | Récupérer toutes les blagues |
+| GET     | `/api/v1/blagues/:id`       | Récupérer une blague par ID |
+| GET     | `/api/v1/blagues/random`    | Obtenir une blague aléatoire |
+| POST    | `/api/v1/blagues`           | Ajouter une nouvelle blague |
+| DELETE  | `/api/v1/blagues/:id`       | Supprimer une blague par ID |
 
 ---
 
 ## 📘 Documentation Swagger
 
+### Accès local :
 ```bash
 http://localhost:5000/api-docs
 ```
 
-En ligne :  
+### Accès en ligne :
 🔗 [https://carambar-blague-api.onrender.com/api-docs](https://carambar-blague-api.onrender.com/api-docs)
+
+La documentation est générée automatiquement depuis le fichier `swagger.js` avec des annotations dans les routes.
 
 ---
 
-## 📂 Fichier d’environnement
+## 🧪 Tests API (Postman)
 
-Crée un fichier `.env` à la racine du projet :
+Le fichier de test est disponible dans le dossier `postman/` :
+
+```
+postman/carambar_postman_collection.json
+```
+
+Importable directement dans Postman pour tester tous les endpoints.
+
+---
+
+## ⚙️ Stack technique
+
+- **Node.js** / **Express**
+- **Sequelize** + **SQLite**
+- **Architecture MVC**
+- **Swagger** pour la documentation API
+- Déploiement sur **Render.com**
+
+---
+
+## 📁 Structure du projet
+
+```
+backend/
+├── config/
+│   ├── database.js
+│   └── sequelize.js
+├── controllers/
+│   └── BlagueController.js
+├── data/
+│   └── blagues.js
+├── models/
+│   └── Blague.js
+├── swagger/
+│   └── swagger.js
+├── seed.js
+├── server.js
+├── database.sqlite
+├── .env
+├── .gitignore
+├── package.json
+└── README.md
+```
+
+---
+
+## 📂 Fichier `.env` requis
+
+Crée un fichier `.env` à la racine du dossier `backend/` avec ce contenu minimal :
 
 ```
 PORT=5000
@@ -46,15 +101,6 @@ PORT=5000
 
 ---
 
-## 📤 Collection Postman
+## 👤 Auteur
 
-Le fichier `carambar-api.postman_collection.json` est disponible à la racine du dossier backend pour tester facilement tous les endpoints.
-
----
-
-## ⚙️ Stack technique
-
-- Node.js / Express
-- Sequelize / SQLite
-- Déploiement : Render.com
-- Architecture MVC
+Projet réalisé par **Romain Monier** dans le cadre du test de sélection CDA (Concepteur Développeur d’Applications) - Simplon.co – juillet 2025.
