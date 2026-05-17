@@ -4,6 +4,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const sequelize = require('./config/database');
+const Blague = require('./models/Blague');
+const blagues = require('./data/blagues');
 const blagueRoutes = require('./routes/api/v1/blagues');
 const configurerSwagger = require('./swagger/swagger');
 
@@ -36,6 +38,16 @@ configurerSwagger(app);
   try {
     await sequelize.sync();
     console.log('✅ Base de données synchronisée');
+    const count = await Blague.count();
+    console.log(`📦 Blagues en base : ${count}`);
+    if (count === 0) {
+      try {
+        await Blague.bulkCreate(blagues);
+        console.log(`🌱 Seed effectué — ${blagues.length} blagues insérées`);
+      } catch (seedErr) {
+        console.error('❌ Échec du seed :', seedErr.message);
+      }
+    }
     app.listen(PORT, () => {
       console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
       console.log(`📘 Swagger disponible sur http://localhost:${PORT}/api-docs`);
