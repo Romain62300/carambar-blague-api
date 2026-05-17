@@ -9,9 +9,17 @@ const configurerSwagger = require('./swagger/swagger');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+const originesAutorisees = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim())
+  : ['http://localhost:3000', 'http://localhost:5000'];
+
 app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  origin: (origin, callback) => {
+    if (!origin || originesAutorisees.includes(origin)) return callback(null, true);
+    callback(new Error(`Origine non autorisée par la politique CORS : ${origin}`));
+  },
+  methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
 }));
 
 

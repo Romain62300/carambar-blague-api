@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const BlagueController = require('../../../controllers/BlagueController');
+const authentifierCleApi = require('../../../middleware/auth');
 
 /**
  * @swagger
@@ -89,7 +90,7 @@ router.get('/:id', BlagueController.obtenirBlagueParId);
  *       400:
  *         description: Données manquantes
  */
-router.post('/', BlagueController.creerBlague);
+router.post('/', authentifierCleApi, BlagueController.creerBlague);
 
 /**
  * @swagger
@@ -132,6 +133,6 @@ router.get('/', BlagueController.obtenirToutesBlagues);
  *       404:
  *         description: Blague non trouvée
  */
-router.delete('/:id', BlagueController.supprimerBlague);
+router.delete('/:id', authentifierCleApi, BlagueController.supprimerBlague);
 
 module.exports = router;

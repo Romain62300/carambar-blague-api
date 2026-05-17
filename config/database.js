@@ -13,7 +13,7 @@ const sequelize = new Sequelize(
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false  // utile si vous ne chargez pas de certificat
+        rejectUnauthorized: true
       }
     }
   }
